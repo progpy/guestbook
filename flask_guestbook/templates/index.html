@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+
+<table><tbody>
+    <tr><th>Имя</th><th>Сообщение</th></tr>
+    {% for message in messages %}
+    <tr><td>{{ message.name }}</td><td>{{ message.text }}</td></tr>
+    {% endfor %}
+</tbody></table>
+
+</body>
+</html>
