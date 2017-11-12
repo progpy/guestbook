@@ -1,5 +1,5 @@
 import datetime
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -19,9 +19,20 @@ class Message(db.Model):
 
 @app.route("/")
 def index():
-    messages = Message.query.all()[:10]
+    messages = Message.query.order_by(Message.created_at.desc())[:10]
     context = {
         'title': 'Good guestbook!',
         'messages': messages,
     }
     return render_template('index.html', **context)
+
+
+@app.route('/post', methods=['POST'])
+def post():
+    name = request.form.get('name')
+    text = request.form.get('text')
+    if name and text:
+        msg = Message(name=name, text=text)
+        db.session.add(msg)
+        db.session.commit()
+    return redirect('/')
