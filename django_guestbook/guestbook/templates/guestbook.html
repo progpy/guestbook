@@ -21,17 +21,10 @@
 </table>
 <form name="new-message" method="post" action="/">
     {% csrf_token %}
-    <table>
-        <tbody>
-            <tr>
-                <td>Имя</td><td><input type="text" name="name"></td>
-            </tr>
-            <tr>
-                <td>Сообщение</td><td><textarea name="text"></textarea></td>
-            </tr>
-            <tr><td colspan="2"><input type="submit"></td></tr>
-        </tbody>
-    </table>
+    <table><tbody>
+        {{ form.as_table }}
+        <tr><td colspan="2"><input type="submit"></td></tr>
+    </tbody></table>
 </form>
 </body>
 </html>
